@@ -15,6 +15,7 @@ const writeData=async()=>{
     await writeFile("note.txt","I am fs module");
     console.log("file written");
 };
+
 const main=()=>{
     console.log("main");
     //f1(); 
