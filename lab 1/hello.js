@@ -1,6 +1,7 @@
 function sayHello(name) {
     console.log(`Hello ${name}`);
 }
+
 const sayHi = (name) => {
     console.log(`Hi ${name}`);
 }
