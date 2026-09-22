@@ -33,6 +33,7 @@ const ToWord = (digit) => {
 //     console.log(ToWord(Number(d)));
 // });
 
+
 const rollnum = "2503201000243";
 const digit = String(rollnum).split("");
 console.log(digit);
