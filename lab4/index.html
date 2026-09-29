@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Flow — Your day, simplified. Plan, focus, and build better habits." />
+  <title>Flow — Your day, simplified</title>
+
+  <style>
+    :root {
+      --bg: #08090d;
+      --bg-soft: #101118;
+      --card: #14151c;
+      --card-light: #1b1c25;
+      --text: #f7f7f8;
+      --muted: #9b9da8;
+      --accent: #8b5cf6;
+      --accent-2: #a78bfa;
+      --green: #34d399;
+      --border: rgba(255,255,255,.09);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: auto;
+    }
+
+    /* ---------- NAV ---------- */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(8,9,13,.7);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #c084fc);
+      box-shadow: 0 8px 30px rgba(139,92,246,.35);
+    }
+
+    .logo-mark::after {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border: 2px solid white;
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-button {
+      padding: 11px 18px;
+      border-radius: 12px;
+      background: white;
+      color: #111;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      color: white;
+      border: 0;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      min-height: 850px;
+      padding-top: 150px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      top: -300px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        circle,
+        rgba(139,92,246,.25),
+        transparent 68%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.035);
+      color: #c5c6ce;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .eyebrow span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    h1 {
+      font-size: clamp(54px, 8vw, 94px);
+      line-height: .98;
+      letter-spacing: -5px;
+      margin-bottom: 28px;
+    }
+
+    h1 .gradient {
+      background: linear-gradient(100deg, #fff 10%, #a78bfa 55%, #c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 590px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform .2s, box-shadow .2s, background .2s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: white;
+      color: #101116;
+      box-shadow: 0 10px 35px rgba(255,255,255,.1);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      color: white;
+    }
+
+    /* ---------- PHONE ---------- */
+
+    .phone-wrapper {
+      margin: 80px auto 0;
+      width: 300px;
+      height: 610px;
+      position: relative;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .phone-glow {
+      position: absolute;
+      inset: 80px -100px;
+      background: radial-gradient(
+        ellipse,
+        rgba(139,92,246,.35),
+        transparent 65%
+      );
+      filter: blur(30px);
+      z-index: -1;
+    }
+
+    .phone {
+      height: 100%;
+      width: 100%;
+      border: 8px solid #252630;
+      border-radius: 45px;
+      background: #0d0e13;
+      box-shadow:
+        0 50px 100px rgba(0,0,0,.55),
+        inset 0 0 0 1px rgba(255,255,255,.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .notch {
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 25px;
+      border-radius: 20px;
+      background: #08090d;
+      z-index: 5;
+    }
+
+    .app {
+      padding: 48px 19px 20px;
+    }
+
+    .app-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .app-date {
+      color: #8f919c;
+      font-size: 11px;
+    }
+
+    .app-title {
+      font-size: 22px;
+      font-weight: 750;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c084fc, #6366f1);
+    }
+
+    .progress-card {
+      padding: 17px;
+      background: linear-gradient(135deg, #6d3de7, #8b5cf6);
+      border-radius: 19px;
+      margin-bottom: 22px;
+      box-shadow: 0 15px 30px rgba(109,61,231,.2);
+    }
+
+    .progress-card small {
+      opacity: .75;
+      font-size: 10px;
+    }
+
+    .progress-row {
+      margin-top: 7px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+    }
+
+    .progress-number {
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .ring {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.25);
+      border-top-color: white;
+      transform: rotate(30deg);
+    }
+
+    .section-title {
+      font-size: 12px;
+      color: #777984;
+      margin-bottom: 10px;
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px;
+      background: #171820;
+      border: 1px solid rgba(255,255,255,.055);
+      border-radius: 14px;
+      margin-bottom: 8px;
+    }
+
+    .check {
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      border: 1px solid #555866;
+      flex-shrink: 0;
+    }
+
+    .check.done {
+      border: 0;
+      background: var(--green);
+      position: relative;
+    }
+
+    .check.done::after {
+      content: "✓";
+      position: absolute;
+      color: #072217;
+      font-size: 11px;
+      font-weight: 900;
+      left: 4px;
+      top: 0;
+    }
+
+    .task-text {
+      font-size: 11px;
+    }
+
+    .task.done .task-text {
+      text-decoration: line-through;
+      color: #777984;
+    }
+
+    .task-time {
+      margin-left: auto;
+      color: #777984;
+      font-size: 9px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    /* ---------- TRUST ---------- */
+
+    .trusted {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+    }
+
+    .trusted-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 45px;
+      flex-wrap: wrap;
+      color: #62646e;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    /* ---------- FEATURES ---------- */
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin-bottom: 55px;
+    }
+
+    .section-heading .label {
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 13px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      margin-bottom: 18px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 30px;
+      border: 1px solid var(--border);
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.045),
+        rgba(255,255,255,.015)
+      );
+      border-radius: var(--radius);
+      transition: transform .25s, border-color .25s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      border-color: rgba(139,92,246,.35);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(139,92,246,.12);
+      color: #b794ff;
+      font-size: 21px;
+      margin-bottom: 24px;
+    }
+
+    .feature h3 {
+      font-size: 19px;
+      margin-bottom: 9px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ---------- SHOWCASE ---------- */
+
+    .showcase {
+      background: #0d0e13;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .showcase-copy h2 {
+      font-size: clamp(38px, 5vw, 60px);
+      line-height: 1.05;
+      letter-spacing: -3px;
+      margin-bottom: 20px;
+    }
+
+    .showcase-copy > p {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 15px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .check-list span {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(52,211,153,.12);
+      color: var(--green);
+      font-size: 11px;
+    }
+
+    .dashboard {
+      padding: 15px;
+      background: #171820;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      box-shadow: 0 35px 80px rgba(0,0,0,.35);
+    }
+
+    .dashboard-header {
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      color: #858792;
+      font-size: 12px;
+    }
+
+    .chart {
+      height: 230px;
+      border-radius: 17px;
+      background:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ---------- TESTIMONIAL ---------- */
+
+    .testimonial {
+      text-align: center;
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .quote {
+      font-size: clamp(25px, 4vw, 40px);
+      line-height: 1.3;
+      letter-spacing: -1px;
+    }
+
+    .person {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ---------- CTA ---------- */
+
+    .cta {
+      padding: 120px 0;
+    }
+
+    .cta-box {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 85px 30px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(167,139,250,.28), transparent 50%),
+        linear-gradient(135deg, #17121f, #101116);
+      border: 1px solid rgba(167,139,250,.18);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(40px, 6vw, 65px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 18px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 35px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #676974;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 800px) {
+      .nav-links,
+      .nav-button {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        min-height: 800px;
+        padding-top: 125px;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      section {
+        padding: 85px 0;
+      }
+
+      .phone-wrapper {
+        width: 275px;
+        height: 560px;
+      }
+
+      .trusted-inner {
+        gap: 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .phone-wrapper {
+        width: 255px;
+        height: 520px;
+      }
+
+      .cta-box {
+        padding: 65px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark"></span>
+        Flow
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+
+      <a href="#download" class="nav-button">Get Started</a>
+
+      <button class="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container">
+
+        <div class="hero-content">
+          <div class="eyebrow">
+            <span></span>
+            Your new daily companion
+          </div>
+
+          <h1>
+            Your day.<br />
+            <span class="gradient">In flow.</span>
+          </h1>
+
+          <p class="hero-description">
+            Plan your day, build better habits, and stay focused on
+            what matters — all from one beautifully simple mobile app.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#download" class="btn btn-primary">
+              Download Flow
+              <span>→</span>
+            </a>
+
+            <a href="#features" class="btn btn-secondary">
+              Explore features
+            </a>
+          </div>
+        </div>
+
+        <!-- PHONE MOCKUP -->
+        <div class="phone-wrapper">
+          <div class="phone-glow"></div>
+
+          <div class="phone">
+            <div class="notch"></div>
+
+            <div class="app">
+              <div class="app-top">
+                <div>
+                  <div class="app-date">MONDAY, SEPTEMBER 29</div>
+                  <div class="app-title">Good morning 👋</div>
+                </div>
+
+                <div class="avatar"></div>
+              </div>
+
+              <div class="progress-card">
+                <small>TODAY'S PROGRESS</small>
+
+                <div class="progress-row">
+                  <div class="progress-number">68%</div>
+                  <div class="ring"></div>
+                </div>
+              </div>
+
+              <div class="section-title">TODAY'S PRIORITIES</div>
+
+              <div class="task">
+                <div class="check done"></div>
+                <div class="task-text">Morning workout</div>
+                <div class="task-time">8:00</div>
+              </div>
+
+              <div class="task">
+                <div class="check"></div>
+                <div class="task-text">Finish project proposal</div>
+                <div class="task-time">10:30</div>
+              </div>
+
+              <div class="task">
+                <div class="check"></div>
+                <div class="task-text">Read for 20 minutes</div>
+                <div class="task-time">19:00</div>
+              </div>
+
+              <div style="height:18px"></div>
+
+              <div class="section-title">HABITS</div>
+
+              <div class="task">
+                <div class="check done"></div>
+                <div class="task-text">Drink 2L of water</div>
+              </div>
+
+              <div class="task">
+                <div class="check done"></div>
+                <div class="task-text">Meditate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <div class="trusted">
+      <div class="container trusted-inner">
+        <span>10K+ USERS</span>
+        <span>4.9 ★ APP RATING</span>
+        <span>50K+ HABITS BUILT</span>
+        <span>120K+ FOCUS SESSIONS</span>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="label">Everything in one place</div>
+
+          <h2>
+            Less planning.<br />
+            More doing.
+          </h2>
+
+          <p>
+            Flow removes the clutter from productivity so you can
+            spend your energy on the things that actually matter.
+          </p>
+        </div>
+
+        <div class="features">
+
+          <article class="feature">
+            <div class="feature-icon">✦</div>
+            <h3>Plan your day</h3>
+            <p>
+              Turn your priorities into a simple daily plan that
+              keeps you moving without overwhelming you.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">↗</div>
+            <h3>Build better habits</h3>
+            <p>
+              Create routines that stick with lightweight tracking,
+              streaks, and meaningful progress insights.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">◉</div>
+            <h3>Stay focused</h3>
+            <p>
+              Start focused sessions, eliminate distractions, and
+              make consistent progress toward your goals.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOWCASE -->
+    <section class="showcase" id="how-it-works">
+      <div class="container showcase-grid">
+
+        <div class="showcase-copy">
+          <div class="section-heading">
+            <div class="label">Made for real life</div>
+
+            <h2>
+              Know what matters.<br />
+              Do what matters.
+            </h2>
+
+            <p>
+              You don't need another complicated productivity system.
+              Flow gives you just enough structure to make every day count.
+            </p>
+          </div>
+
+          <ul class="check-list">
+            <li>
+              <span>✓</span>
+              One simple view for your entire day
+            </li>
+
+            <li>
+              <span>✓</span>
+              Smart reminders when you need them
+            </li>
+
+            <li>
+              <span>✓</span>
+              Progress tracking without the pressure
+            </li>
+
+            <li>
+              <span>✓</span>
+              Works across all your devices
+            </li>
+          </ul>
+        </div>
+
+        <div class="dashboard">
+          <div class="dashboard-header">
+            <span>Weekly focus</span>
+            <span>Last 7 days</span>
+          </div>
+
+          <div class="chart">
+            <svg viewBox="0 0 600 230" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#8b5cf6" stop-opacity=".35"/>
+                  <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <path
+                d="M0,185
+                   C55,165 75,180 115,145
+                   C160,105 185,140 230,118
+                   C270,98 295,130 335,95
+                   C375,60 400,100 440,75
+                   C485,48 515,72 550,40
+                   C570,25 590,35 600,20
+                   L600,230 L0,230 Z"
+                fill="url(#area)"
+              />
+
+              <path
+                d="M0,185
+                   C55,165 75,180 115,145
+                   C160,105 185,140 230,118
+                   C270,98 295,130 335,95
+                   C375,60 400,100 440,75
+                   C485,48 515,72 550,40
+                   C570,25 590,35 600,20"
+                fill="none"
+                stroke="#a78bfa"
+                stroke-width="4"
+              />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section id="reviews">
+      <div class="container">
+        <div class="testimonial">
+
+          <div class="eyebrow">
+            ★ Loved by early users
+          </div>
+
+          <p class="quote">
+            “Flow finally made productivity feel simple.
+            I spend less time planning and more time actually
+            getting things done.”
+          </p>
+
+          <div class="person">
+            Sarah M. · Flow user
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="download">
+      <div class="container">
+
+        <div class="cta-box">
+          <h2>Make today count.</h2>
+
+          <p>
+            Your goals don't need more complexity.<br />
+            They need a better system.
+          </p>
+
+          <a href="#" class="btn btn-primary">
+            Download Flow →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+
+      <div>
+        © 2026 Flow. All rights reserved.
+      </div>
+
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Simple mobile menu behavior
+    const menuButton = document.querySelector(".menu-btn");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuButton.addEventListener("click", () => {
+      const open = navLinks.style.display === "flex";
+
+      navLinks.style.display = open ? "none" : "flex";
+      navLinks.style.position = "absolute";
+      navLinks.style.top = "76px";
+      navLinks.style.left = "0";
+      navLinks.style.right = "0";
+      navLinks.style.padding = "25px";
+      navLinks.style.background = "rgba(8,9,13,.96)";
+      navLinks.style.flexDirection = "column";
+      navLinks.style.gap = "20px";
+      navLinks.style.borderBottom = "1px solid rgba(255,255,255,.08)";
+    });
+
+    // Close mobile menu after clicking a link
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 800) {
+          navLinks.style.display = "none";
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
